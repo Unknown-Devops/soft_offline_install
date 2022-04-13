@@ -13,3 +13,4 @@
 
 2、nfs_offline_install：离线安装nfs
 
+3、redis6.2.1_offline_install：redis6.2.1离线安装

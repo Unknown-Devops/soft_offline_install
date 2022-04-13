@@ -1,0 +1,12 @@
+编译安装redis之前请先安装gcc 
+
+redis离线安装目录  /usr/local/redis 
+使用sshusr 用户启动,sshusr密码为Ysshusr-0412
+配置如下：
+1、全局监听
+2、开启redis  密码 Redis-prod
+3、开启后台运行
+4、设置pid位置为/usr/local/redis/redis.pid
+5、设置数据存储文件位置为/usr/local/redis/data
+6、设置日志位置为 /usr/local/redis/logs
+7、端口默认6379
