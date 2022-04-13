@@ -1,0 +1,6 @@
+nfs文件同步安装说明
+1、同步路径见 /etc/exports 文件(安装成功后在这个位置，安装前直接修改安装目录下的即可)，可以根据需要修改路径
+2、如果yum 安装失败，执行
+mkdir  /etc/yum.repos.d/back
+mv  /etc/yum.repos.d/*repo   /etc/yum.repos.d/back
+然后清除之前安装目录，再重新解压安装包安装
