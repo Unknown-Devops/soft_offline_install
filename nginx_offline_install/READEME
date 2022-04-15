@@ -1,0 +1,13 @@
+安装前请先安装ssl_offline_install.zip （包中包含所有需要的依赖）
+
+安装方法：
+1、上传安装包，解压
+	cd nginx_offline_install
+	sh nginx_install.sh
+2、nginx 版本1.18
+3、默认安装目录 /usr/local/nginx
+4、编译模块
+ --prefix=/usr/local/nginx   --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module    --with-openssl=/usr/local/openssl/
+5、由于指定了安装目录，建议一台设备上不要重复安装多个此安装包，可能会发生异常
+6、由于配置文件中指定端口为80，启动用户为sshusr，非root用户无法占用1024 以下端口，所以无法自动启动，需要修改nginx.conf 中监听端口后，nginx才能自动启动
+7、sshusr 密码  sshusr@12#$
