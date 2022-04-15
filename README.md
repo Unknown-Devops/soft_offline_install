@@ -9,8 +9,18 @@
 
 离线安装软件列表：
 
-1、openssh8.4_offline_install ：离线安装openssh8.4
+1、openssh8.4_offline_install 
 
-2、nfs_offline_install：离线安装nfs
+2、nfs_offline_install
 
-3、redis6.2.1_offline_install：redis6.2.1离线安装
+3、redis6.2.1_offline_install
+
+4、keepalive_offline_install
+
+5、nginx_offline_install
+
+6、php_offline_install
+
+7、tomcat8.5.69_offline_install
+
+8、vim_offline_install
