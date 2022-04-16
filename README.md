@@ -24,3 +24,27 @@
 7、tomcat8.5.69_offline_install
 
 8、vim_offline_install
+
+---------------------------------------------------------------------------------------------------------------------------
+
+以下列表软件，由于软件包过大，无法直接上传github，请使用各软件下的ReadMe中的连接下载完整离线安装包
+
+1、Docker_offline_install
+
+2、FastDFS_offline_install
+
+3、gcc_offline_install
+
+4、jdk1.8_offline_install
+
+5、LibreOffice_offline_install
+
+6、mariadb10.3.31_offline_install
+
+7、mongodb4.4.5_offline_install
+
+8、mysql5.7.33_offline_install
+
+9、mysql8.0.11_offline_install
+
+10、prome_offline_installl

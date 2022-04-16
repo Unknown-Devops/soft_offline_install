@@ -1,0 +1,113 @@
+# my global config
+global:
+  scrape_interval:     30s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - 192.168.10.96:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "rules/*_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'mysql'
+    file_sd_configs:
+      - files: ["mysql_file/*.json"]
+#    static_configs:
+#      - targets: ['192.168.10.199:9104','192.168.10.94:9104','192.168.10.222:9104','192.168.10.141:9104']
+  - job_name: 'host'
+    scrape_interval: 30s
+    scrape_timeout: 30s
+    file_sd_configs:
+      - files: ["host_conf/host*.json"]
+  - job_name: 'spring-boot-prometheus'
+    scrape_interval: 30s
+    scrape_timeout: 30s
+    metrics_path: '/prometheus'
+    file_sd_configs:
+      - files: ["service_conf/service*.json"]
+  - job_name: 'spring-boot-metrics'
+    scrape_interval: 30s
+    scrape_timeout: 30s
+    metrics_path: '/metrics'
+    file_sd_configs:
+      - files: ["metrics*.json"]
+  - job_name: 'redis'
+    file_sd_configs:
+      - files: ["redis_file/*.json"]
+#    static_configs:
+#      - targets: ['192.168.10.199:9121']
+  - job_name: 'blackbox_http'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    file_sd_configs:
+    - refresh_interval: 10s
+      files:
+      - blackbox_file/blackbox-exporter-http.yml
+    relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 175.27.249.136:9115 # The blackbox exporter's real hostname:port.  tencent cloud server
+  - job_name: "icmp_ping"
+    metrics_path: /probe
+    params:
+      module: [icmp]  # 使用icmp模块
+    file_sd_configs:
+    - refresh_interval: 10s
+      files:
+      - "ping_conf/*.yml"  #具体的配置文件
+    relabel_configs:
+    - source_labels: [__address__]
+      regex: (.*)(:80)?
+      target_label: __param_target
+      replacement: ${1}
+    - source_labels: [__param_target]
+      target_label: instance
+    - source_labels: [__param_target]
+      regex: (.*)
+      target_label: ping
+      replacement: ${1}
+    - source_labels: []
+      regex: .*
+      target_label: __address__
+      replacement: 175.27.249.136:9115
+  - job_name: "blackbox_TCP"
+    metrics_path: /probe
+    params:
+      module: [tcp_connect]
+    file_sd_configs:
+    - refresh_interval: 10s
+      files:
+      - blackbox_file/blackbox-exporter-tcp.yml
+    relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 192.168.10.96:9115
+  - job_name: "pushgateway"
+    static_configs:
+      - targets: ['192.168.10.96:9091']
+        labels:
+          instance: pushgateway

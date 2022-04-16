@@ -1,0 +1,6 @@
+1、mariadb  安装目录 /usr/local/mariadb/   数据目录 /data/mariadb_data/
+2、安装完成后执行 source /etc/profile.d/mariadb.sh 重新加载环境变量
+3、数据库初始化无密码，直接登录后再修改密码
+
+链接：https://pan.baidu.com/s/1AV2Q2PAHBGxPOWu_w4XiGA 
+提取码：bocx

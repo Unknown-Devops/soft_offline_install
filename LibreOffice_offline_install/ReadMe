@@ -1,0 +1,9 @@
+链接：https://pan.baidu.com/s/1DjxcvdX3BcYZry5oVfSXOg 
+提取码：bcig
+
+如果安装过LIBREOFFICE，需要先卸载
+
+find / -name "libreoffice*"   #检测是否有安装过，没有则跳过下一步
+yum remove libreoffice*       #卸载原先的libreoffice软件
+
+安装完成字体后，需要重启kkFileView等使用字体的软件才能生效

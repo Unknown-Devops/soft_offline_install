@@ -1,0 +1,19 @@
+链接：https://pan.baidu.com/s/1YwN2UxlG2IR0d3rOnm0d_w 
+提取码：afir
+
+/var/lib/mongo （数据目录）
+/var/log/mongodb （日志目录）
+/etc/mongod.conf （配置文件）
+
+卸载方法：
+1、停止 MongoDB
+service mongod stop
+
+2、删除包。
+删除您之前安装的所有 MongoDB 包。
+yum erase $(rpm -qa | grep mongodb-org)
+
+3、删除数据目录。
+删除 MongoDB 数据库和日志文件。
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongo

@@ -1,0 +1,17 @@
+链接：https://pan.baidu.com/s/1AdjYjofmtsUVRwkOZsUsvQ 
+提取码：ca1p
+
+1、nginx 端口为 8888
+2、storage 端口为230001
+3、tracker 端口为22122
+4、docker 版本为delron/fastdfs latest
+5、安装前请先安装gcc_offline_install.sh保证依赖包都安装成功，否则可以出现缺少依赖包的现象
+
+测试
+docker exec -it storage bash
+echo "testtesttset" >index.html
+fdfs_upload_file  /etc/fdfs/client.conf index.html
+
+
+
+

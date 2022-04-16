@@ -1,0 +1,54 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.163.com:25'
+  smtp_from: 'wujy1993@163.com'
+  smtp_auth_username: 'wujy1993@163.com'
+  smtp_auth_password: '930526690101'
+  smtp_require_tls: false
+templates:
+  - '/data/alertmanager/template/*.tmpl'
+
+#route:
+#  group_by: ['alertname']
+#  group_wait: 10s
+#  group_interval: 10s
+#  repeat_interval: 1h
+#  receiver: 'web.book'
+#inhibit_rules:
+#  - source_match:
+#      severity: 'critical'
+#    target_match:
+#      severity: 'warning'
+#    equal: ['alertname', 'dev', 'instance']
+route:
+  group_by: ['alertname','cluster','service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 30m
+  routes:
+  - receiver: 'default-receiver'
+    match_re:
+      contact: 'crawler'
+  - receiver: 'web.hook.send1'
+    continue: true
+    match_re:
+      contact: '!(crawler)'
+  - receiver: 'web.hook.send2'
+    match_re:
+      contact: '!(crawler)'
+  receiver: 'web.hook.send1'
+#  receiver: 'web.hook.dingding'
+receivers:
+- name: 'default-receiver'
+  email_configs:
+  - to: '593943936@qq.com'
+    #html: '{{ template "alert.html" . }}'
+    headers: { Subject: "Prometheus 告警邮件" }
+  - to: 'jjn0942@163.com'
+    headers: { Subject: "Prometheus 告警邮件" }
+- name: 'web.hook.send1'
+  webhook_configs:
+  - url: 'http://10.51.45.18:10009/api/v1/alertMsg/create'
+- name: 'web.hook.send2'
+  webhook_configs:
+  - url: 'http://10.51.45.16:10009/api/v1/alertMsg/create'
