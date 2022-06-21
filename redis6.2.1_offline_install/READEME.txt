@@ -10,3 +10,14 @@ redis离线安装目录  /usr/local/redis
 5、设置数据存储文件位置为/usr/local/redis/data
 6、设置日志位置为 /usr/local/redis/logs
 7、端口默认6379
+
+redis 哨兵模式配置说明
+1、redis主从设备配置文件增加
+appendonly yes（原来是no）
+2、从机增加
+masterauth 主机密码
+slaveof 主机ip  主机端口
+
+3、将sentinel.conf 放到和redis.conf 目录下
+4、mkdir /usr/local/redis/sentinel
+5、修改自启动脚本，加入sentinel 监控
